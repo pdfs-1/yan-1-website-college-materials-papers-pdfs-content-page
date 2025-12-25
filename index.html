@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Hub</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: #0f172a;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* ---------- HOME OPTIONS ---------- */
+#home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.option {
+  width: 220px;
+  height: 120px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.option:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+/* ---------- IFRAME VIEW ---------- */
+#iframeContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  background: #000;
+  z-index: 9999;
+}
+
+#iframeContainer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ---------- CLOSE BUTTON ---------- */
+#closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 26px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background 0.2s;
+}
+
+#closeBtn:hover {
+  background: rgba(255,0,0,0.85);
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME OPTIONS -->
+<div id="home">
+  <div class="option" onclick="openContent('materials_content.html')">
+    MATERIALS
+  </div>
+  <div class="option" onclick="openContent('papers_content.html')">
+    PAPERS
+  </div>
+</div>
+
+<!-- IFRAME CONTAINER -->
+<div id="iframeContainer">
+  <div id="closeBtn" onclick="closeIframe()">✕</div>
+  <iframe
+    id="contentFrame"
+    allow="
+      accelerometer;
+      autoplay;
+      camera;
+      clipboard-read;
+      clipboard-write;
+      encrypted-media;
+      fullscreen;
+      geolocation;
+      gyroscope;
+      magnetometer;
+      microphone;
+      midi;
+      payment;
+      picture-in-picture;
+      screen-wake-lock;
+      usb;
+      web-share
+    "
+    allowfullscreen
+  ></iframe>
+</div>
+
+<script>
+function openContent(url) {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("iframeContainer").style.display = "block";
+  document.getElementById("contentFrame").src = url;
+}
+
+function closeIframe() {
+  document.getElementById("contentFrame").src = "";
+  document.getElementById("iframeContainer").style.display = "none";
+  document.getElementById("home").style.display = "flex";
+}
+</script>
+
+</body>
+</html>
